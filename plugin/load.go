@@ -9,7 +9,7 @@ import (
 )
 
 // Load loads a Dogma plugin.
-func Load(file string) (Plugin, error) {
+func Load(file string) (*Plugin, error) {
 	base := path.Base(file)
 
 	p, err := plugin.Open(file)
@@ -26,7 +26,7 @@ func Load(file string) (Plugin, error) {
 		)
 	}
 
-	x, ok := s.(v1.API)
+	api, ok := s.(v1.API)
 	if !ok {
 		return nil, fmt.Errorf(
 			"%s is not a valid plugin, the %s symbol has type %T, which does not impement the v1.API interface",
@@ -36,5 +36,8 @@ func Load(file string) (Plugin, error) {
 		)
 	}
 
-	return x, nil
+	return &Plugin{
+		API:  api,
+		File: file,
+	}, nil
 }
