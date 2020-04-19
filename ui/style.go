@@ -18,22 +18,23 @@ func setupStyle() func() {
 	}
 }
 
+// See https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 func setupColorStyle() {
 	tview.Styles.TitleColor = tcell.Color208
 	tview.Styles.BorderColor = tcell.Color236
 	tview.Styles.PrimitiveBackgroundColor = tcell.ColorBlack
+	tview.Styles.ContrastBackgroundColor = tcell.Color235
+	tview.Styles.MoreContrastBackgroundColor = tcell.Color238
 
 	tview.Styles.PrimaryTextColor = tcell.Color249
 	tview.Styles.SecondaryTextColor = tcell.Color241
 	tview.Styles.TertiaryTextColor = tcell.Color238
 
-	// These have not been configured yet and are all set to pink so that they
-	// stand out when do they do appear.
-	tview.Styles.ContrastBackgroundColor = tcell.ColorPink
-	tview.Styles.MoreContrastBackgroundColor = tcell.ColorPink
-	tview.Styles.GraphicsColor = tcell.ColorPink
-	tview.Styles.InverseTextColor = tcell.ColorPink
-	tview.Styles.ContrastSecondaryTextColor = tcell.ColorPink
+	// These have not been configured yet and are all set to bright colors so
+	// that they stand out when do they do appear.
+	tview.Styles.GraphicsColor = tcell.ColorYellow
+	tview.Styles.InverseTextColor = tcell.ColorGreen
+	tview.Styles.ContrastSecondaryTextColor = tcell.Color233
 }
 
 func setupBorderStyle() {
@@ -56,13 +57,4 @@ func setupBorderStyle() {
 	tview.Borders.TopRightFocus = tview.BoxDrawingsHeavyDownAndLeft
 	tview.Borders.BottomLeftFocus = tview.BoxDrawingsHeavyUpAndRight
 	tview.Borders.BottomRightFocus = tview.BoxDrawingsHeavyUpAndLeft
-}
-
-func newList() *tview.List {
-	list := tview.NewList()
-	list.SetHighlightFullLine(true)
-	list.SetShortcutColor(tcell.Color24)
-	list.SetSelectedTextColor(tcell.ColorWhite)
-	list.SetSelectedBackgroundColor(tcell.Color24)
-	return list
 }
