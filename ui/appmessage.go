@@ -22,13 +22,22 @@ func (v *visitor) visitMessages() {
 		return typeName(a) < typeName(b)
 	})
 
-	nodes := map[message.Role]*tview.TreeNode{}
+	commands := tview.NewTreeNode("commands")
+	expandOnSelect(commands, false)
+	v.messages.AddChild(commands)
 
-	for _, r := range message.Roles {
-		n := tview.NewTreeNode(r.String() + "s")
-		expandOnSelect(n, false)
-		v.messages.AddChild(n)
-		nodes[r] = n
+	events := tview.NewTreeNode("events")
+	expandOnSelect(events, false)
+	v.messages.AddChild(events)
+
+	timeouts := tview.NewTreeNode("timeouts")
+	expandOnSelect(timeouts, false)
+	v.messages.AddChild(timeouts)
+
+	nodes := map[message.Role]*tview.TreeNode{
+		message.CommandRole: commands,
+		message.EventRole:   events,
+		message.TimeoutRole: timeouts,
 	}
 
 	roles := v.config.MessageNames().All()

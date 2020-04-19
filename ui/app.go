@@ -93,9 +93,25 @@ func (v *visitor) VisitApplication(ctx context.Context, cfg configkit.Applicatio
 	expandOnSelect(v.handlers, true)
 	v.app.AddChild(v.handlers)
 
+	v.aggregates = tview.NewTreeNode("aggregates")
+	expandOnSelect(v.aggregates, false)
+	v.handlers.AddChild(v.aggregates)
+
+	v.processes = tview.NewTreeNode("processes")
+	expandOnSelect(v.processes, false)
+	v.handlers.AddChild(v.processes)
+
+	v.integrations = tview.NewTreeNode("integrations")
+	expandOnSelect(v.integrations, false)
+	v.handlers.AddChild(v.integrations)
+
 	v.messages = tview.NewTreeNode("messages")
 	expandOnSelect(v.messages, true)
 	v.app.AddChild(v.messages)
+
+	v.projections = tview.NewTreeNode("projections")
+	expandOnSelect(v.projections, false)
+	v.handlers.AddChild(v.projections)
 
 	v.visitMessages()
 
@@ -103,58 +119,22 @@ func (v *visitor) VisitApplication(ctx context.Context, cfg configkit.Applicatio
 }
 
 func (v *visitor) VisitAggregate(_ context.Context, cfg configkit.Aggregate) error {
-	if v.aggregates == nil {
-		v.aggregates = tview.NewTreeNode("aggregates")
-		expandOnSelect(v.aggregates, false)
-		v.handlers.AddChild(v.aggregates)
-	}
-
-	v.aggregates.AddChild(
-		v.handlerNode(cfg),
-	)
-
+	v.aggregates.AddChild(v.handlerNode(cfg))
 	return nil
 }
 
 func (v *visitor) VisitProcess(_ context.Context, cfg configkit.Process) error {
-	if v.processes == nil {
-		v.processes = tview.NewTreeNode("processes")
-		expandOnSelect(v.processes, false)
-		v.handlers.AddChild(v.processes)
-	}
-
-	v.processes.AddChild(
-		v.handlerNode(cfg),
-	)
-
+	v.processes.AddChild(v.handlerNode(cfg))
 	return nil
 }
 
 func (v *visitor) VisitIntegration(_ context.Context, cfg configkit.Integration) error {
-	if v.integrations == nil {
-		v.integrations = tview.NewTreeNode("integrations")
-		expandOnSelect(v.integrations, false)
-		v.handlers.AddChild(v.integrations)
-	}
-
-	v.integrations.AddChild(
-		v.handlerNode(cfg),
-	)
-
+	v.integrations.AddChild(v.handlerNode(cfg))
 	return nil
 }
 
 func (v *visitor) VisitProjection(_ context.Context, cfg configkit.Projection) error {
-	if v.projections == nil {
-		v.projections = tview.NewTreeNode("projections")
-		expandOnSelect(v.projections, false)
-		v.handlers.AddChild(v.projections)
-	}
-
-	v.projections.AddChild(
-		v.handlerNode(cfg),
-	)
-
+	v.projections.AddChild(v.handlerNode(cfg))
 	return nil
 }
 
