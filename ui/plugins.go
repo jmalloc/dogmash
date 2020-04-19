@@ -155,4 +155,6 @@ func addPageForPlugin(
 		0,
 		c.Push(id),
 	)
+
+	menu.SetCurrentItem(0)
 }

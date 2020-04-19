@@ -22,6 +22,8 @@ func setupStyle() func() {
 func setupColorStyle() {
 	tview.Styles.TitleColor = tcell.Color208
 	tview.Styles.BorderColor = tcell.Color236
+	tview.Styles.GraphicsColor = tcell.Color24
+
 	tview.Styles.PrimitiveBackgroundColor = tcell.ColorBlack
 	tview.Styles.ContrastBackgroundColor = tcell.Color235
 	tview.Styles.MoreContrastBackgroundColor = tcell.Color238
@@ -32,7 +34,6 @@ func setupColorStyle() {
 
 	// These have not been configured yet and are all set to bright colors so
 	// that they stand out when do they do appear.
-	tview.Styles.GraphicsColor = tcell.ColorYellow
 	tview.Styles.InverseTextColor = tcell.ColorGreen
 	tview.Styles.ContrastSecondaryTextColor = tcell.Color233
 }
